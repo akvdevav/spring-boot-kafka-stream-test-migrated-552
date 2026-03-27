@@ -8,7 +8,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 
 @SpringBootApplication
@@ -28,7 +27,7 @@ public class Application {
 		return new Queue("word-counters", true);
 	}
 
-	@RabbitListener(queuesToDeclare = @Queue(name = "words"))
+	@RabbitListener(queues = "words")
 	public void processWord(String word) {
 		// Simulate word counting logic
 		AtomicLong counter = new AtomicLong(0);
